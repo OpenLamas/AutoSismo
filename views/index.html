@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>Auto Sismo - Home</title>
+
+<!-- Bootstrap core CSS -->
+<link href="/static/bootstrap.min.css" rel="stylesheet">
+
+<style>
+table{
+  margin-top: 50px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="header">
+    <ul class="nav nav-pills pull-right">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <h3 class="text-muted">Auto Sismo</h3>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Jour</th>
+        <th>Heure</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Profondeur</th>
+        <th>Magitude</th>
+        <th>Lieu</th>
+      </tr>
+    </thead>
+    <tbody>
+    % for earthquake in earthquakes:
+      <tr>
+        <td>{{earthquake.date}}</td>
+        <td>{{earthquake.time}}</td>
+        <td>{{earthquake.latitude}}</td>
+        <td>{{earthquake.longitude}}</td>
+        <td>{{earthquake.depth}}</td>
+        <td>{{earthquake.mag}}</td>
+        <td>{{earthquake.place}}</td>
+      </tr>
+    % end
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <p>&copy; VSC-MS 2014 inc.</p>
+  </div>
+
+</div> <!-- /container -->
+
+</body>
+</html>
+
+
