@@ -1,10 +1,9 @@
 $(document).ready(function(){
 
-
   var markers = [];
   var mag = [];
 
-  $("table tr").each(function(index, item){
+  $("tbody tr").each(function(index, item){
     color($(item));
     markers.push({latLng: [$("td:eq(2)", item).text(), $("td:eq(3)", item).text()], name: index+" Mag: "+ $("td:eq(5)", item).text() +" at "+ $("td:eq(1)", item).text(), code: index});
     mag.push($("td:eq(5)", item).text());
@@ -29,12 +28,12 @@ $(document).ready(function(){
     }
   });
 
-  $("table tr button").click(function(e){
+  $("tbody tr button").click(function(e){
     map.clearSelectedMarkers();
-    map.setSelectedMarkers([+($(this).parents("tr").index()+1)]);
+    map.setSelectedMarkers([$(this).parents("tr").index()]);
    $('html, body').animate({
         scrollTop: $("#world-map").offset().top
-    }, 500); 
+    }, 500);
   });
 });
 
