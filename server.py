@@ -3,9 +3,12 @@ from earthquake import Earthquake
 from datetime import date, timedelta, datetime
 from subprocess import call
 import locale
+import os
 
 locale.setlocale(locale.LC_ALL, '')
 
+if not os.path.exists('earthquakes'):
+    os.mkdir('earthquakes') 
 
 @route('/')
 @route('/<day>')
