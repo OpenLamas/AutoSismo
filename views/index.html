@@ -1,80 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-<!-- Bootstrap core CSS -->
-<link href="/static/favicon.ico" rel="icon" type="image/x-icon" />
+  <link href="/static/favicon.ico" rel="icon" type="image/x-icon" />
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+  <link href="/static/css/style.css" rel="stylesheet">
 
-<title>Auto Sismo - {{day}}</title>
+  <title>Auto Sismo - {{day}}</title>
 
-<!-- Bootstrap core CSS -->
-<link href="static/css/bootstrap.min.css" rel="stylesheet">
-<link href="static/css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
-
-<style>
-table{
-  margin-top: 50px;
-}
-
-table .btn{
-  float: right;
-}
-</style>
 </head>
 
 <body>
 
-<div class="container">
-  <div class="header">
-    <ul class="nav nav-pills pull-right">
-      <li class="active"><a href="#">Table</a></li>
-      <li><a href="#">Liste des jours</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-cog"></span></a></li>
-    </ul>
-    <h2>Auto Sismo <small>{{day}}</small></h2>
-  </div>
+  <div class="container">
+    <div class="header">
+      <ul class="nav nav-pills pull-right">
+        <li class="active"><a href="#">Table</a></li>
+        <li><a href="#">Liste des jours</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-cog"></span></a></li>
+      </ul>
+      <h2>Auto Sismo <small>{{day}}</small></h2>
+    </div>
 
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Jour</th>
-        <th>Heure</th>
-        <th>Latitude</th>
-        <th>Longitude</th>
-        <th>Profondeur</th>
-        <th>Magitude</th>
-        <th>Lieu</th>
-      </tr>
-    </thead>
-    <tbody>
-    % for earthquake in earthquakes:
-    <tr>
-      <td>{{earthquake.date}}</td>
-      <td>{{earthquake.time}}</td>
-      <td>{{earthquake.latitude}}</td>
-      <td>{{earthquake.longitude}}</td>
-      <td>{{earthquake.depth}}</td>
-      <td>{{earthquake.mag}}</td>
-      <td>{{earthquake.place}} <button class="btn btn-xs btn-default"><span class="glyphicon glyphicon-search"></span></button></td>
-    </tr>
-    % end
-    </tbody>
-  </table>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Jour</th>
+          <th>Heure</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+          <th>Profondeur</th>
+          <th>Magitude</th>
+          <th>Lieu</th>
+        </tr>
+      </thead>
+      <tbody>
+        % for earthquake in earthquakes:
+        <tr>
+          <td>{{earthquake.date}}</td>
+          <td>{{earthquake.time}}</td>
+          <td>{{earthquake.latitude}}</td>
+          <td>{{earthquake.longitude}}</td>
+          <td>{{earthquake.depth}}</td>
+          <td>{{earthquake.mag}}</td>
+          <td>{{earthquake.place}}
+            <button class="btn btn-xs btn-default">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </td>
+        </tr>
+        % end
+      </tbody>
+    </table>
 
-  <div class="footer">
-    <p>&copy; VSC-MS 2014 inc.</p>
-  </div>
+    <div id="world-map" class="map"></div>
 
-</div> <!-- /container -->
-<script type="text/javascript" src="static/js/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="static/js/jquery-jvectormap-1.2.2.min.js"></script>
-<script type="text/javascript" src="static/js/jquery-jvectormap-world-mill-en.js"></script>
-<script type="text/javascript" src="static/js/main.js"></script>
+    <div class="footer">
+      <p>&copy; VSC-MS 2014 inc.</p>
+    </div>
+
+  </div> <!-- /container -->
+
+  <script type="text/javascript" src="/static/js/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="/static/js/jquery-jvectormap-1.2.2.min.js"></script>
+  <script type="text/javascript" src="/static/js/jquery-jvectormap-world-mill-en.js"></script>
+  <script type="text/javascript" src="/static/js/main.js"></script>
 
 </body>
 </html>
