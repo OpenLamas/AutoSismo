@@ -3,12 +3,8 @@ from earthquake import Earthquake
 from datetime import date, timedelta, datetime
 from subprocess import call
 import locale
-import os
 
 locale.setlocale(locale.LC_ALL, '')
-
-if not os.path.exists('earthquakes'):
-    os.mkdir('earthquakes') 
 
 @route('/')
 @route('/<day>')
@@ -30,7 +26,7 @@ def ea(day=None):
             # File not existing, retrying after download it
             Earthquake.get_daily_earthquakes(day.strftime("%Y-%m-%d"))
             pass
-
+    
     for line in content[1:]:
         earthquakes.append(Earthquake(line.split(',')))
 
@@ -40,4 +36,4 @@ def ea(day=None):
 def server_static(path):
     return static_file(path, root='static')
 
-run(host='0.0.0.0', port=8080)
+run(host='localhost', port=8080, reloader=True)
