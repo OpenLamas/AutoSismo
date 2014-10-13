@@ -23,7 +23,7 @@ def ea(day=None):
             with open("earthquakes/earthquakes_%s" % day.strftime("%Y-%m-%d")) as f:
                 content = f.readlines()
         except IOError:
-            # File not existing, retrying after download it
+            # File not existing, trying to download it.
             Earthquake.get_daily_earthquakes(day.strftime("%Y-%m-%d"))
 
     for line in content[1:]:
