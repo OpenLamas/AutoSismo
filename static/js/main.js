@@ -22,7 +22,7 @@ $(document).ready(function(){
     series: {
       markers: [{
         attribute: 'r',
-        scale: [5, 15],
+        scale: [2, 10],
         values: mag
       }]
     }
