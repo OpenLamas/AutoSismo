@@ -3,6 +3,7 @@
 import urllib2
 import urllib
 from datetime import date, timedelta, datetime
+import os
 
 class Earthquake:
 
@@ -20,8 +21,11 @@ class Earthquake:
     @classmethod
     def get_daily_earthquakes(self, day=None, minmagnitude=3):
         
+        if not os.path.exists('earthquakes'):
+            os.mkdir('earthquakes')
         # Creating date object from day
         if day is None:
+            # logger.info('None day is definied, picking current day...')
             day = date.today() - timedelta(days=1)
         else:
             day = datetime.strptime(day, "%Y-%m-%d").date()
