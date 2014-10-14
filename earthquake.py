@@ -6,6 +6,7 @@ from datetime import date, timedelta, datetime
 import os
 
 class Earthquake:
+    data_folder = 'earthquakes'
 
     def __init__(self, table):
         date_time = table[0].split("T")
@@ -23,9 +24,9 @@ class Earthquake:
         
         if not os.path.exists('earthquakes'):
             os.mkdir('earthquakes')
+        
         # Creating date object from day
         if day is None:
-            # logger.info('None day is definied, picking current day...')
             day = date.today() - timedelta(days=1)
         else:
             day = datetime.strptime(day, "%Y-%m-%d").date()
@@ -43,12 +44,19 @@ class Earthquake:
         }
         params = urllib.urlencode(data)
         full_url = url + params
-        
-        # Sending request
-        res = urllib2.urlopen(full_url)
+        filename = os.path.join(self.data_folder, 'earthquakes_%s' % day.strftime("%Y-%m-%d"))
 
-        # Saving results
-        filename = "earthquakes/earthquakes_%s" % day.strftime("%Y-%m-%d")
-        filee = open(filename, "w")
-        filee.write(res.read())
-        filee.close()
+        try:
+            # Sending request
+            res = urllib2.urlopen(full_url)
+            
+            # Saving results
+            result_file = open(filename, "w")
+            result_file.write(res.read())
+            result_file.close()
+            return True
+        except:
+            return False
+        
+        
+        
