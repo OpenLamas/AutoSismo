@@ -5,8 +5,17 @@ $(document).ready(function(){
 
   $("tbody tr").each(function(index, item){
     color($(item));
-    markers.push({latLng: [$("td:eq(2)", item).text(), $("td:eq(3)", item).text()], name: index+" Mag: "+ $("td:eq(5)", item).text() +" at "+ $("td:eq(1)", item).text(), code: index});
-    mag.push($("td:eq(5)", item).text());
+    markers.push({latLng: [$("td:eq(2)", item).text(), $("td:eq(3)", item).text()], name: index+" Mag: "+ $("td:eq(5)", item).text() +" at "+ $("td:eq(1)", item).text(), mag: $("td:eq(5)", item).text()});
+  });
+
+  markers.sort(function(a, b){
+    return a.mag < b.mag ? 1
+    : a.mag > b.mag ? -1
+    : 0;
+  });
+
+  markers.forEach(function(el){
+    mag.push(el.mag);
   });
 
   var map = new jvm.WorldMap({
@@ -22,7 +31,7 @@ $(document).ready(function(){
     series: {
       markers: [{
         attribute: 'r',
-        scale: [2, 10],
+        scale: [2, 15],
         values: mag
       }]
     }
