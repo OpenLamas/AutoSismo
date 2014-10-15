@@ -18,16 +18,21 @@ def ea(day=None):
     else:
         day = datetime.strptime(day, "%Y-%m-%d")
 
-    for _ in range(2):
-        try:
-            with open("earthquakes/earthquakes_%s" % day.strftime("%Y-%m-%d")) as f:
-                content = f.readlines()
-        except IOError:
-            # File not existing, retrying after download it
-            Earthquake.get_daily_earthquakes(day.strftime("%Y-%m-%d"))
+    ea_file = os.path.join(Earthquake.data_folder, 'earthquakes_%s' % day.strftime("%Y-%m-%d"))
 
-    for line in content[1:]:
-        earthquakes.append(Earthquake(line.split(',')))
+    if not os.path.exists(ea_file):
+        try:
+            Earthquake.get_daily_earthquakes(day.strftime("%Y-%m-%d"))
+        except:
+            pass
+
+    if os.path.exists(ea_file):
+        with open(ea_file) as f:
+            earthquake_file_content = f.readlines() or None
+        
+        # Create objects
+        for line in earthquake_file_content[1:]:
+            earthquakes.append(Earthquake(line.split(',')))
 
     return template('index', earthquakes=earthquakes, day=day.strftime("%A %d %B %Y").capitalize())
 
